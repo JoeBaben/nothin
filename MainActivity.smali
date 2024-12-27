@@ -12341,6 +12341,54 @@
     return-void
 .end method
 
+# instance fields
+.field final synthetic this$0:Lcom/fingersoft/game/MainActivity;
+
+# direct methods
+.method constructor <init>(Lcom/fingersoft/game/MainActivity;)V
+    .registers 2
+    
+    .prologue
+    .line 1
+    iput-object p1, p0, Lcom/fingersoft/game/MainActivity$FpsUpdateRunnable;->this$0:Lcom/fingersoft/game/MainActivity;
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+    return-void
+.end method
+
+# virtual methods
+.method public run()V
+    .registers 6
+    
+    .prologue
+    .line 1
+    iget-object v0, p0, Lcom/fingersoft/game/MainActivity$FpsUpdateRunnable;->this$0:Lcom/fingersoft/game/MainActivity;
+    
+    invoke-static {}, Lorg/cocos2dx/lib/Cocos2dxDirector;->getInstance()Lorg/cocos2dx/lib/Cocos2dxDirector;
+    move-result-object v1
+    invoke-virtual {v1}, Lorg/cocos2dx/lib/Cocos2dxDirector;->getFrameRate()F
+    move-result v1
+    
+    iget-object v2, v0, Lcom/fingersoft/game/MainActivity;->mFpsTextView:Landroid/widget/TextView;
+    new-instance v3, Ljava/lang/StringBuilder;
+    invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
+    const-string v4, "FPS: "
+    invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    float-to-int v1, v1
+    invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    invoke-virtual {v3}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    move-result-object v1
+    invoke-virtual {v2, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+    
+    new-instance v1, Landroid/os/Handler;
+    invoke-direct {v1}, Landroid/os/Handler;-><init>()V
+    new-instance v2, Lcom/fingersoft/game/MainActivity$FpsUpdateRunnable;
+    invoke-direct {v2, v0}, Lcom/fingersoft/game/MainActivity$FpsUpdateRunnable;-><init>(Lcom/fingersoft/game/MainActivity;)V
+    const-wide/16 v3, 0x3e8
+    invoke-virtual {v1, v2, v3, v4}, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable;J)Z
+    
+    return-void
+.end method
+
 .method useOFFLINEAd()Z
     .registers 2
 
